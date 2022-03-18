@@ -1,1 +1,3 @@
-# gitea_test_task
+- docker-compose с gitea запускается и останавливается из pytest с помощью subprocess
+- Поиск эталонного текста и селекторов осуществляется с помощью requests/pytest/bs4
+- Для запуска тестов с более подробным выводом нужно использовать команду - pytest -s -l -v tests/tests.py
