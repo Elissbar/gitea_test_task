@@ -7,6 +7,7 @@ import requests
 from time import time
 from docker_client import *
 import os
+import warnings
 
 
 root_dir = os.path.abspath(os.path.dirname(__file__))
@@ -21,6 +22,7 @@ def config():
 def pytest_configure(config):
     timeout = 120
     start_time = time()
+    warnings.simplefilter('ignore', ResourceWarning)
     run_docker_containers(root_dir)
     while time() - start_time < timeout:
         try:
