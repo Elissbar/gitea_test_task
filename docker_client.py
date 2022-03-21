@@ -14,12 +14,13 @@ def run_docker_containers(root_dir):
             'MYSQL_DATABASE': 'gitea'},
         detach=True
     )
+    volume = client.volumes.create(name='gitea', driver='local')
     gitea = client.containers.run(
         'gitea/gitea:latest',
         name='gitea',
         ports={3000: 3000},
         volumes={
-            f'{root_dir}/gitea': {'bind': '/data', 'mode': 'rw'},
+            f'gitea': {'bind': '/data', 'mode': 'rw'},
             f'{root_dir}/app.ini': {'bind': '/data/gitea/conf/app.ini', 'mode': 'rw'},
             '/etc/timezone': {'bind': '/etc/timezone', 'mode': 'rw'},
             '/etc/localtime': {'bind': '/etc/localtime', 'mode': 'rw'},
@@ -41,4 +42,3 @@ def stop_docker_containers():
     for container in client.containers.list():
         container.stop()
     client.containers.prune()
-

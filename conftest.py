@@ -32,8 +32,6 @@ def pytest_configure(config):
     if os.path.exists(test_dir):
         shutil.rmtree(test_dir)
     os.makedirs(test_dir)
-    if not os.path.exists(os.path.join(root_dir, 'gitea')):
-        os.makedirs(os.path.join(root_dir, 'gitea'))
     setattr(config, 'test_dir', test_dir)
 
 
